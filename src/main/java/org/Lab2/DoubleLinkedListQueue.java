@@ -21,6 +21,7 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
                 first.setNext(last);
             } else {
                 last.setNext(node);
+                node.setPrevious(last);
                 last = node;
             }
         }
@@ -28,41 +29,62 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void appendLeft(DequeNode<T> node) {
-        node.setNext(first);
-        first = node;
+        if (size() == 0) {
+            first = node;
+            last = node;
+        } else {
+            node.setNext(first);
+            first.setPrevious(node);
+            first = node;
+        }
     }
 
     @Override
     public void deleteFirst() {
-        first = first.getNext();
-        first.setPrevious(null);
+        if (size() != 0) {
+            if (first == last) {
+                first = null;
+                last = null;
+            } else {
+                first = first.getNext();
+                first.setPrevious(null);
+            }
+        }
     }
 
     @Override
     public void deleteLast() {
-        last = last.getPrevious();
-        last.setNext(null);
+        if (size() != 0) {
+            if (first == last) {
+                first = null;
+                last = null;
+            } else {
+                last = last.getPrevious();
+                last.setNext(null);
+            }
+        }
     }
 
     @Override
     public DequeNode<T> peekFirst() {
-        return null;
+        return first;
     }
 
     @Override
     public DequeNode<T> peekLast() {
-        return null;
+        return last;
     }
 
     @Override
     public int size() {
-        int cont = 0;
-        DequeNode<T> node = first;
-        while (node.getNext() != null) {
-            node = node.getNext();
-            cont++;
-        }
+        return doSize(first);
+    }
 
-        return cont;
+    private int doSize(DequeNode<T> node) {
+        if (node == null) {
+            return 0;
+        } else {
+            return 1 + doSize(node.getNext());
+        }
     }
 }
