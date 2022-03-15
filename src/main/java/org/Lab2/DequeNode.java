@@ -1,17 +1,25 @@
 package org.Lab2;
 
 public class DequeNode<T> {
-    /**
-     * Class representing a node of a double-ended queue (deque). Each node has pointers to
-     * the next and previous nodes.
-     * The previous and next of the first and last node of the deque is null.
-     *
-     * @param <T>
-     */
+
     private T item;
     private DequeNode<T> next;
     private DequeNode<T> previous;
 
+    // Setters
+    public void setItem(T item) {
+        this.item = item;
+    }
+
+    public void setNext(DequeNode<T> next) {
+        this.next = next;
+    }
+
+    public void setPrevious(DequeNode<T> previous) {
+        this.previous = previous;
+    }
+
+    // Getters
     public T getItem() {
         return item;
     }
