@@ -99,15 +99,6 @@ class DoubleLinkedListQueueTest<T> {
     }
 
     @Test
-    public void shouldSizeBe0IfDeleteFirstOnEmptyList() {
-        int expectedValue = 0;
-        doubleLinkedListQueue.deleteFirst();
-        int obtainedValue = doubleLinkedListQueue.size();
-
-        assertEquals(expectedValue, obtainedValue);
-    }
-
-    @Test
     public void shouldSizeBe0IfDeleteFirstOnListWithOneNode() {
         int expectedValue = 0;
         doubleLinkedListQueue.append((DequeNode<T>) new DequeNode<>(1, null, null));
@@ -135,15 +126,6 @@ class DoubleLinkedListQueueTest<T> {
         doubleLinkedListQueue.append((DequeNode<T>) new DequeNode<>(2, null, null));
         doubleLinkedListQueue.append((DequeNode<T>) new DequeNode<>(2, null, null));
         doubleLinkedListQueue.deleteFirst();
-        int obtainedValue = doubleLinkedListQueue.size();
-
-        assertEquals(expectedValue, obtainedValue);
-    }
-
-    @Test
-    public void shouldSizeBe0IfDeleteLastOnEmptyList() {
-        int expectedValue = 0;
-        doubleLinkedListQueue.deleteLast();
         int obtainedValue = doubleLinkedListQueue.size();
 
         assertEquals(expectedValue, obtainedValue);
@@ -188,6 +170,16 @@ class DoubleLinkedListQueueTest<T> {
         int obtainedValue = doubleLinkedListQueue.size();
 
         assertEquals(expectedValue, obtainedValue);
+    }
+
+    @Test
+    public void shouldDeleteFirstThrowExceptionWhenSizeIsZero() {
+        assertThrows(RuntimeException.class, () -> new DoubleLinkedListQueue<>().deleteFirst());
+    }
+
+    @Test
+    public void shouldDeleteLastThrowExceptionWhenSizeIsZero() {
+        assertThrows(RuntimeException.class, () -> new DoubleLinkedListQueue<>().deleteLast());
     }
 
 }

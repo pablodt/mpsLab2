@@ -41,7 +41,9 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void deleteFirst() {
-        if (size() != 0) {
+        if (size() == 0) {
+            throw new RuntimeException("No se puede eliminar de una lista vacia");
+        } else {
             if (first == last) {
                 first = null;
                 last = null;
@@ -54,7 +56,9 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void deleteLast() {
-        if (size() != 0) {
+        if (size() == 0) {
+            throw new RuntimeException("No se puede eliminar de una lista vacia");
+        } else {
             if (first == last) {
                 first = null;
                 last = null;
