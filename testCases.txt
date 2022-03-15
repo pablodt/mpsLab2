@@ -1,0 +1,15 @@
+Carlos Dominguez Enriquez
+Pablo Duran Trujillano
+
+Casos de prueba para DequeNote:
+
+- Creamos un item y esperamos que el que devuelve al hacer getItem sea el mismo.
+- Inicializamos DequeNode<T> next y comprobamos que getNext nos devuelva el valor que le hemos asignado.
+- Inicializamos DequeNode<T> previous y comprobamos que getPrevious nos devuelva el valor que le hemos asignado.
+- Comprobamos que el constructor DequeNote cree correctamente el objeto cuando le pasamos los valores que se le pasan por parametro.
+- Comprobamos si es el primer nodo, primero lo comprobamos con un nodo que si lo sea(previous tiene  que ser null), por tante devuelve true y
+despues con uno que no lo sea (con previous distinto de NULL), que deberia devolver false.
+- Para comprobar que sea el ultimo nodo, primero esperamos que devuelva true cuando next sea NULL, y despues probamos que devuelva false cuando next
+no sea NULL.
+- Este ultimo metodo nos devolvera true siempre que nuestro nodo no sea ni el primero ni el ultimo, si los dos test creados previamente funcionan
+correctamente nos devolvera false solo cuando el nodo sea primero o ultimo.
