@@ -16,24 +16,32 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
             last = node;
         } else {
             if (first == last) {
-                
+                last = node;
+                last.setPrevious(first);
+                first.setNext(last);
+            } else {
+                last.setNext(node);
+                last = node;
             }
         }
     }
 
     @Override
     public void appendLeft(DequeNode<T> node) {
-
+        node.setNext(first);
+        first = node;
     }
 
     @Override
     public void deleteFirst() {
-
+        first = first.getNext();
+        first.setPrevious(null);
     }
 
     @Override
     public void deleteLast() {
-
+        last = last.getPrevious();
+        last.setNext(null);
     }
 
     @Override
