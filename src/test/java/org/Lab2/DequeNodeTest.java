@@ -16,11 +16,18 @@ class DequeNodeTest<T> {
     }
 
     @Test
+    public void shouldGetItem() {
+        Integer expectedValue = 10;
+        DequeNode<Integer> node = new DequeNode<>(10, null, null);
+        Integer obtainedValue = node.getItem();
+        assertEquals(expectedValue, obtainedValue);
+    }
+
+    @Test
     public void shouldSetItemChangeItemOfNode() {
         Integer expectedValue = 10;
         dequeNode.setItem(10);
         Integer obtainedValue = dequeNode.getItem();
-
         assertEquals(expectedValue, obtainedValue);
     }
 
@@ -30,7 +37,6 @@ class DequeNodeTest<T> {
         DequeNode<Integer> expectedValue = node;
         dequeNode.setNext(node);
         DequeNode<Integer> obtainedValue = dequeNode.getNext();
-
         assertEquals(expectedValue, obtainedValue);
     }
 
@@ -60,7 +66,7 @@ class DequeNodeTest<T> {
 
     @Test
     public void shouldnotBeTerminalNodeNextAndPreviousNotNull() {
-        DequeNode<Integer> node = new DequeNode<>(10, DequeNode (4), DequeNode (5));
+        DequeNode<Integer> node = new DequeNode<>(10, dequeNode.setNext(5), dequeNode.setPrevious(6) );
         DequeNode<Integer> expectedValue = node;
         assertTrue(expectedValue.isNotATerminalNode());
     }
