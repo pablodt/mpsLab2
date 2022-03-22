@@ -1,8 +1,0 @@
-PABLO DURAN TRUJILLANO
-CARLOS DOMINGUEZ ENRIQUEZ
-
-Casos de prueba de DequeNode:
-    - Comprueba que la operacion setItem funciona correctamente.
-    - Comprueba que la operacion setNext funciona correctamente.
-
-Casos de prueba de DoubleLinkedListQueue:
