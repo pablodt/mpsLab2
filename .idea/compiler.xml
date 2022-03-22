@@ -6,7 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
         <module name="developPablo" />
+=======
+        <module name="developCarlos" />
+>>>>>>> developCarlos
         <module name="practica2" />
         <module name="mpsLab2" />
       </profile>
