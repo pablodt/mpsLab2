@@ -2,7 +2,22 @@ PABLO DURAN TRUJILLANO
 CARLOS DOMINGUEZ ENRIQUEZ
 
 Casos de prueba de DequeNode:
-    - Comprueba que la operacion setItem funciona correctamente.
-    - Comprueba que la operacion setNext funciona correctamente.
+    - Comprueba que la operacion getItem funciona correctamente.
+    - Comprueba que la operacion getNext funciona correctamente.
+    - Comprueba que la operacion getPrevious funciona correctamente.
+    - Comprueba que setItem cambie el valor de item.
+    - Comprueba que setNext cambie el valor de next.
+    - Comprueba que setPrevious cambie el valor de previous.
+    - Comprueba que es primer nodo, es decir, que previous es null.
+    - Comprueba que es ultimo nodo, es decir, que next es null.
+    - Comprueba que es no es ni primer nodo ni ultimo nodo, es decir, que tanto next como previous tienen valores no nulos.
 
 Casos de prueba de DoubleLinkedListQueue:
+    - Comprueba que el tmaño sea uno cuando haces appendLeft en una lista vacía. Repetimos el mismo test ejecutando hasta 4 veces
+appendLeft para comprobar que funcione con distintos valores.
+    - Comprobamos que el tamaño sea 0 cuando hacemos appendLeft y despues deleteFirst. Lo mismo lo hacemos haciendo 2 veces appendLeft
+y una vez deleteFirst para comprobar que el tamaño sea 1. Lo repetimos de nuevo ejecutando una vez mas appendLeft y deleteFirst para que size sea 2.
+    - Hacemos exactamente lo mismo que en los test anterior pero usando deleteLast en vez de deleteFirst.
+    - Comprobamos que devuelva size 0 cuando es una lista vacia.
+    - Comprobamos que lance RuntimeException cuando ejecutamos deleteFirst en una lista vacia.
+    - Comprobamos que lance RuntimeException cuando ejecutamos deleteLast en una lista vacia.
