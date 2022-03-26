@@ -90,7 +90,7 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
     @Override
     public DequeNode<T> getAt(int position) {
         if (position > 0) {
-            if (position+1 > this.size()) {
+            if (position > this.size()) {
                 return null;
             } else {
                 int i = 1;
@@ -115,9 +115,10 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
         while (i < this.size() && !ok) {
             if (result.getItem().equals(item)) {
                 ok = true;
+            } else {
+                result = result.getNext();
+                i++;
             }
-            result = result.getNext();
-            i++;
         }
 
         if (!ok) {
@@ -129,25 +130,35 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void delete(DequeNode<T> node) {
-        DequeNode<T> n = first;
-        while (!n.equals(last)) {
-            if (n.equals(node)) {
-                if (n.isFirstNode()) {
-                    first = n.getNext();
-                    n.setNext(null);
-                    first.setPrevious(null);
-                } else if (n.isLastNode()) {
-                    last = n.getPrevious();
-                    last.setNext(null);
-                    n.setPrevious(null);
-                } else {
-                    n.getPrevious().setNext(n.getNext());
-                    n.getNext().setPrevious(n.getPrevious());
-                    n.setPrevious(null);
-                    n.setNext(null);
-                }
+        DequeNode<T> n = null;
+        int i = 0;
+        boolean ok = false;
+        while (i < this.size() && !ok) {
+            n = this.getAt(i);
+            if (node.equals(n)) {
+                ok = true;
+            } else {
+                i++;
             }
-            n = n.getNext();
+        }
+
+        if (n.isFirstNode()) {
+            if (n.isLastNode()) {
+                first = null;
+                n.setPrevious(null);
+                n.setNext(null);
+            } else {
+                first = n.getNext();
+                first.setPrevious(null);
+                n.setNext(null);
+            }
+        } else if (n.isLastNode()) {
+            last = n.getPrevious();
+            last.setNext(null);
+            n.setPrevious(null);
+        } else {
+            n.getPrevious().setNext(n.getNext());
+            n.getNext().setPrevious(n.getPrevious());
         }
     }
 
