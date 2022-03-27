@@ -1,5 +1,8 @@
 package org.Lab2;
 
+import java.util.Comparator;
+import java.util.Deque;
+
 public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
 
     private DequeNode<T> first, last;
@@ -82,6 +85,118 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
     @Override
     public int size() {
         return doSize(first);
+    }
+
+    @Override
+    public DequeNode<T> getAt(int position) {
+        if (position > 0) {
+            if (position > this.size()) {
+                return null;
+            } else {
+                int i = 1;
+                DequeNode<T> result = first.getNext();
+                while (i < position) {
+                    result = result.getNext();
+                    i++;
+                }
+
+                return result;
+            }
+        } else {
+            return first;
+        }
+    }
+
+    @Override
+    public DequeNode<T> find(T item) {
+        DequeNode<T> result = first;
+        int i = 0;
+        boolean ok = false;
+        while (i < this.size() && !ok) {
+            if (result.getItem().equals(item)) {
+                ok = true;
+            } else {
+                result = result.getNext();
+                i++;
+            }
+        }
+
+        if (!ok) {
+            result = null;
+        }
+
+        return result;
+    }
+
+    @Override
+    public void delete(DequeNode<T> node) {
+        DequeNode<T> n = null;
+        int i = 0;
+        boolean ok = false;
+        while (i < this.size() && !ok) {
+            n = this.getAt(i);
+            if (node.equals(n)) {
+                ok = true;
+            } else {
+                i++;
+            }
+        }
+
+        if (n.isFirstNode()) {
+            if (n.isLastNode()) {
+                first = null;
+                n.setPrevious(null);
+                n.setNext(null);
+            } else {
+                first = n.getNext();
+                first.setPrevious(null);
+                n.setNext(null);
+            }
+        } else if (n.isLastNode()) {
+            last = n.getPrevious();
+            last.setNext(null);
+            n.setPrevious(null);
+        } else {
+            n.getPrevious().setNext(n.getNext());
+            n.getNext().setPrevious(n.getPrevious());
+        }
+    }
+
+    @Override
+    public void sort(Comparator<T> comparator) {
+        bubbleSort(comparator);
+    }
+
+    private void bubbleSort(Comparator<T> comparator) {
+        if (first != null) {
+            DequeNode<T> current = null, new_head = null, move_node = null, prev = null;
+
+            while (first != null) {
+                prev = null;
+                current = first;
+                move_node = first;
+                while (current != null) {
+                    if (current.getNext() != null && comparator.compare(current.getNext().getItem(), move_node.getItem()) > 0) {
+                        move_node = current.getNext();
+                        prev = current;
+                    }
+                    current = current.getNext();
+                }
+
+                if (move_node.equals(first)) {
+                    first = first.getNext();
+                }
+
+                if (prev != null) {
+                    prev.setNext(move_node.getNext());
+                }
+
+                move_node.setNext(new_head);
+                new_head = move_node;
+            }
+
+            first = new_head;
+        }
     }
 
     private int doSize(DequeNode<T> node) {
