@@ -164,53 +164,38 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void sort(Comparator<T> comparator) {
-        mergeSort(this, comparator);
+        bubbleSort(comparator);
     }
 
-    private void mergeSort(DoubleLinkedListQueue<T> doubleLinkedListQueue, Comparator<T> comparator) {
-        if (doubleLinkedListQueue == null) {
-            return;
-        }
+    private void bubbleSort(Comparator<T> comparator) {
+        if (first != null) {
+            DequeNode<T> current = null, new_head = null, move_node = null, prev = null;
 
-        if (doubleLinkedListQueue.size() > 1) {
-            int mid = doubleLinkedListQueue.size()/2;
-
-            DoubleLinkedListQueue<T> left = new DoubleLinkedListQueue<>();
-            for (int i = 0; i < mid; i++) {
-                left.append(doubleLinkedListQueue.getAt(i));
-            }
-
-            DoubleLinkedListQueue<T> right = new DoubleLinkedListQueue<>();
-            for (int i = mid; i < doubleLinkedListQueue.size(); i++) {
-                right.append(doubleLinkedListQueue.getAt(i));
-            }
-
-            mergeSort(left, comparator);
-            mergeSort(right, comparator);
-
-            int i = 0;
-            int j = 0;
-            DoubleLinkedListQueue<T> list = new DoubleLinkedListQueue<>();
-
-            while (i < left.size() && j < right.size()) {
-                if (comparator.compare(left.getAt(i).getItem(), right.getAt(j).getItem()) < 0) {
-                    list.append(left.getAt(i));
-                    i++;
-                } else {
-                    list.append(right.getAt(i));
-                    j++;
+            while (first != null) {
+                prev = null;
+                current = first;
+                move_node = first;
+                while (current != null) {
+                    if (current.getNext() != null && comparator.compare(current.getNext().getItem(), move_node.getItem()) > 0) {
+                        move_node = current.getNext();
+                        prev = current;
+                    }
+                    current = current.getNext();
                 }
+
+                if (move_node.equals(first)) {
+                    first = first.getNext();
+                }
+
+                if (prev != null) {
+                    prev.setNext(move_node.getNext());
+                }
+
+                move_node.setNext(new_head);
+                new_head = move_node;
             }
 
-            while (i < left.size()) {
-                list.append(left.getAt(i));
-                i++;
-            }
-
-            while (j < right.size()) {
-                list.append(right.getAt(i));
-                j++;
-            }
+            first = new_head;
         }
     }
 

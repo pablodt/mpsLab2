@@ -30,6 +30,22 @@ class DoubleLinkedListQueueTest<T> {
         return res;
     }
 
+    private boolean isOrdered() {
+        boolean res = true;
+        int i = 0;
+        int j = i+1;
+        while (j < doubleLinkedListQueue.size() && res) {
+            if (doubleLinkedListQueue.getAt(i).getItem() >= doubleLinkedListQueue.getAt(j).getItem()) {
+                res = false;
+            } else {
+                j++;
+                i++;
+            }
+        }
+
+        return res;
+    }
+
     @Test
     public void shouldSizeBe1IfAppendOnEmptyList() {
         int expectedValue = 1;
@@ -638,7 +654,81 @@ class DoubleLinkedListQueueTest<T> {
 
     @Test
     public void shouldNotSortDoAnythingOnEmptyList() {
+        assertTrue(doubleLinkedListQueue.size() == 0);
+        doubleLinkedListQueue.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+        assertTrue(doubleLinkedListQueue.size() == 0);
+    }
 
+    @Test
+    public void shouldNotSortDoAnythingOnListWithOneNode() {
+        DequeNode<Integer> node = new DequeNode<>(10, null, null);
+        doubleLinkedListQueue.append(node);
+        doubleLinkedListQueue.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+        assertTrue(doubleLinkedListQueue.size() == 1);
+    }
+
+    @Test
+    public void shouldSortOrderListWithTwoNodes() {
+        DequeNode<Integer> node1 = new DequeNode<>(15, null, null);
+        DequeNode<Integer> node2 = new DequeNode<>(10, null, null);
+        doubleLinkedListQueue.append(node1);
+        doubleLinkedListQueue.append(node2);
+        assertTrue(!isOrdered());
+        doubleLinkedListQueue.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+        assertTrue(isOrdered());
+    }
+
+    @Test
+    public void shouldSortOrderListWithThreeNodes() {
+        DequeNode<Integer> node1 = new DequeNode<>(15, null, null);
+        DequeNode<Integer> node2 = new DequeNode<>(10, null, null);
+        DequeNode<Integer> node3 = new DequeNode<>(5, null, null);
+        doubleLinkedListQueue.append(node1);
+        doubleLinkedListQueue.append(node2);
+        doubleLinkedListQueue.append(node3);
+        assertTrue(!isOrdered());
+        doubleLinkedListQueue.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+        assertTrue(isOrdered());
+    }
+
+    @Test
+    public void shouldSortOrderListWithFourNodes() {
+        DequeNode<Integer> node1 = new DequeNode<>(15, null, null);
+        DequeNode<Integer> node2 = new DequeNode<>(10, null, null);
+        DequeNode<Integer> node3 = new DequeNode<>(5, null, null);
+        DequeNode<Integer> node4 = new DequeNode<>(20, null, null);
+        doubleLinkedListQueue.append(node1);
+        doubleLinkedListQueue.append(node2);
+        doubleLinkedListQueue.append(node3);
+        doubleLinkedListQueue.append(node4);
+        assertTrue(!isOrdered());
+        doubleLinkedListQueue.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+        assertTrue(isOrdered());
     }
 
 }
