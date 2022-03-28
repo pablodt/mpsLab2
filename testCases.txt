@@ -13,11 +13,21 @@ Casos de prueba de DequeNode:
     - Comprueba que es no es ni primer nodo ni ultimo nodo, es decir, que tanto next como previous tienen valores no nulos.
 
 Casos de prueba de DoubleLinkedListQueue:
-    - Comprueba que el tmaño sea uno cuando haces appendLeft en una lista vacía. Repetimos el mismo test ejecutando hasta 4 veces
-appendLeft para comprobar que funcione con distintos valores.
+    - Comprueba que el tamaño sea uno cuando haces append en una lista vacía. Repetimos el mismo test ejecutando hasta 4 veces
+append para comprobar que funcione con distintos valores y con listas que no estén vacías inicialmente.
+    - Comprueba que el tamaño sea uno cuando haces appendLeft en una lista vacía. Repetimos el mismo test ejecutando hasta 4 veces
+appendLeft para comprobar que funcione con distintos valores. Tambien comprobamos que el nodo se meta en la posicion correcta.
     - Comprobamos que el tamaño sea 0 cuando hacemos appendLeft y despues deleteFirst. Lo mismo lo hacemos haciendo 2 veces appendLeft
-y una vez deleteFirst para comprobar que el tamaño sea 1. Lo repetimos de nuevo ejecutando una vez mas appendLeft y deleteFirst para que size sea 2.
+y una vez deleteFirst para comprobar que el tamaño sea 1. Lo repetimos de nuevo ejecutando una vez mas appendLeft y deleteFirst para que size sea 2. Tambien
+comprobamos que el nodo que hemos borrado es el de la posicion que queremos.
     - Hacemos exactamente lo mismo que en los test anterior pero usando deleteLast en vez de deleteFirst.
     - Comprobamos que devuelva size 0 cuando es una lista vacia.
     - Comprobamos que lance RuntimeException cuando ejecutamos deleteFirst en una lista vacia.
     - Comprobamos que lance RuntimeException cuando ejecutamos deleteLast en una lista vacia.
+    - Comprobamos que lance RuntimeException cuando ejecutamos peekfirst en una lista vacia.
+    - Comprobamos que peekFirst devuelva el valor del primer nodo en listas de distintos nodos.
+    - Hacemos lo mismo con peekLast.
+    - Comprobamos que getAt nos devuelva los nodos de las posiciones que queremos y en distintas listas.
+    - Comprobamos que el metodo find encuentre el nodo que le pedimos o devuelva null si no se encuentra en la lista.
+    - Comprobamos que al hacer un Delete a un nodo que esta en mitad de la lista este se borre.
+    - Comprobamos que el metodo sort no haga nada en listas vacias o de un elemento y que ordene listas de dos o mas nodos.
